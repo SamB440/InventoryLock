@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -23,8 +24,8 @@ public class ItemListener implements Listener {
 	@EventHandler
 	public void onDrop(PlayerDropItemEvent pdie)
 	{
-		ItemStack item = pdie.getItemDrop().getItemStack();
 		Player p = pdie.getPlayer();
+		ItemStack item = pdie.getItemDrop().getItemStack();
 		if(item.equals(plugin.getLockedItem()))
 		{
 			if(!getConfig().getStringList("Server.Slots.Enabled_Locked").contains(String.valueOf(p.getInventory().getHeldItemSlot() + 1))) p.getInventory().getItemInMainHand().setType(Material.AIR);
@@ -35,6 +36,23 @@ public class ItemListener implements Listener {
 		}
 	}
 	
+	@EventHandler
+	public void onMove(InventoryMoveItemEvent pime)
+	{
+		ItemStack item = pime.getItem();
+		if(pime.getSource().getHolder() instanceof Player)
+		{
+			Player p = (Player) pime.getSource().getHolder();
+			if(item.equals(plugin.getLockedItem()))
+			{
+				if(!getConfig().getStringList("Server.Slots.Enabled_Locked").contains(String.valueOf(p.getInventory().getHeldItemSlot() + 1))) p.getInventory().getItemInMainHand().setType(Material.AIR);
+				else {
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("Server.Messages.Unlock")));
+					pime.setCancelled(true);
+				}
+			}
+		}
+	}
 	private FileConfiguration getConfig()
 	{
 		return plugin.getConfig();
