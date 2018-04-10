@@ -33,7 +33,7 @@ public class RespawnListener implements Listener {
 				ItemStack item = p.getInventory().getItem(Integer.parseInt(s) - 1);
 				if(item == null)
 				{
-					p.getInventory().setItem(Integer.parseInt(s), plugin.getLockedItem());
+					p.getInventory().setItem(Integer.parseInt(s) - 1, plugin.getLockedItem());
 				} else {
 					if(!item.equals(plugin.getLockedItem()))
 					{

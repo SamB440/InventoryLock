@@ -49,7 +49,7 @@ public class InventoryLockCommand implements CommandExecutor {
 			p.spigot().sendMessage(github);
 		} else if(args.length == 1) {
 			
-			if(args[0].equalsIgnoreCase("reload"))
+			if(args[0].equalsIgnoreCase("reload") && p.isOp() || p.hasPermission("inventorylock.reload"))
 			{
 				p.sendMessage(ChatColor.GREEN + "Reloading...");
 				plugin.reloadConfig();
