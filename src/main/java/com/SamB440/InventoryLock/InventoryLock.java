@@ -18,6 +18,7 @@ import com.SamB440.InventoryLock.listeners.BlockListener;
 import com.SamB440.InventoryLock.listeners.InventoryListener;
 import com.SamB440.InventoryLock.listeners.ItemListener;
 import com.SamB440.InventoryLock.listeners.JoinListener;
+import com.SamB440.InventoryLock.listeners.RespawnListener;
 
 public class InventoryLock extends JavaPlugin {
 	
@@ -39,6 +40,7 @@ public class InventoryLock extends JavaPlugin {
 		pm.registerEvents(new BlockListener(this), this);
 		pm.registerEvents(new ItemListener(this), this);
 		pm.registerEvents(new JoinListener(this), this);
+		pm.registerEvents(new RespawnListener(this), this);
 	}
 	private void createConfig()
 	{
