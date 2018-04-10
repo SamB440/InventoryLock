@@ -1,0 +1,10 @@
+name: InventoryLock
+main: com.SamB440.InventoryLock.InventoryLock
+author: SamB440
+website: http://www.islandearth.net
+version: 1.0.0
+commands:
+  InventoryLock:
+     description: Main plugin command.
+     usage: /InventoryLock
+     aliases: [il, invl]
